@@ -20,6 +20,11 @@ const createIntern = async function (req, res) {
         .status(400)
         .send({ status: false, message: "Enter a valid name" });
     }
+    if (!/^[a-zA-Z ]*$/.test(data.name)) {
+      return res
+        .status(400)
+        .send({ status: false, massege: "plz enter valid name with title & dont use number or special characters" });
+    }
     if (!data.email) {
       return res
         .status(400)
