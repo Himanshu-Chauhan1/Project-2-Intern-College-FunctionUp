@@ -89,6 +89,36 @@ const getCollegeDetails = async function (req, res) {
     } catch (err) {
         res.status(500).send({ status: false, message: err.message });
     }
+<<<<<<< HEAD
+=======
+    let collegeName=req.query.collegeName.toUpperCase()
+    const isValidCollege = await collegeModel.findOne({ name: collegeName }); //{ _Id}
+    if (!isValidCollege) {
+      return res.status(400).send({
+        status: false,
+        message: "you have entered a invalid college name ",
+      });
+    }
+    const getIntern = await internModel
+      .find({ collegeId: isValidCollege._id, isDeleted: false })
+      .select({ name: 1, mobile: 1, email: 1 });
+    if (getIntern.length == 0) {
+      return res.status(404).send({
+        status: false,
+        message: "no intern found with your provided college details",
+      });
+    }
+    const getAllIntern = {
+      name: isValidCollege.name,
+      fullName: isValidCollege.fullName,
+      logoLink: isValidCollege.logoLink,
+      interests: getIntern,
+    };
+    res.status(200).send({ status: true, data: getAllIntern });
+  } catch (err) {
+    res.status(500).send({ status: false, message: err.message });
+  }
+>>>>>>> 50af106780fab20e4f67ef757596afd65925cc85
 };
 
 module.exports.createIntern = createIntern;

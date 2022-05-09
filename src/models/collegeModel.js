@@ -14,7 +14,7 @@ const collegeSchema = new mongoose.Schema(
       required: [true, "college first name is required"],
       trim: true
     },
-    logolink: {
+    logoLink: {
       type: String,
       required: [true, "logo is required"],
       trim: true
